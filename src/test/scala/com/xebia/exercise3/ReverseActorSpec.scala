@@ -1,14 +1,12 @@
 package com.xebia
 package exercise3
 
+import com.xebia.exercise3.TestSupport._
+import org.specs2.mutable.Specification
 import spray.testkit.Specs2RouteTest
 
-import org.specs2.mutable.Specification
-
-import TestSupport._
-
 class ReverseActorSpec extends Specification
-                          with Specs2RouteTest {
+  with Specs2RouteTest {
 
   "The ReverseActor" should {
     "Reverse a string that it receives if it is not a Palindrome" in new AkkaTestkitContext() {
@@ -21,11 +19,10 @@ class ReverseActorSpec extends Specification
       import ReverseActor._
 
       val reverseActor = system.actorOf(props, name)
-      import akka.pattern.ask
 
       reverseActor ! Reverse("reverse this!")
 
-      expectMsg(NotInitialized)
+      expectMsg(NotInitialized())
 
       // We will fix this later
       Thread.sleep(600)
@@ -49,7 +46,7 @@ class ReverseActorSpec extends Specification
       val reverseActor = system.actorOf(props, name)
 
       reverseActor ! Reverse("akka")
-      expectMsg(NotInitialized)
+      expectMsg(NotInitialized())
 
       // We will fix this later
       Thread.sleep(600)

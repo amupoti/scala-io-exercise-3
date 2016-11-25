@@ -39,7 +39,7 @@ trait ReverseRoute extends HttpService with CreationSupport {
         onComplete(futureResponse) {
           case Success(PalindromeResult) => complete(ReverseResponse(request.value, true))
           case Success(ReverseResult(value)) => complete(ReverseResponse(value, false))
-          case Success(NotInitialized) => complete(StatusCodes.ServiceUnavailable)
+          case Success(NotInitialized()) => complete(StatusCodes.ServiceUnavailable)
           case Failure(e) => complete(StatusCodes.InternalServerError)
         }
       }
